@@ -136,13 +136,13 @@ router.get('/piechart', async (req, res) => {
 // Combined API
 router.get('/combined', async (req, res) => {
     const { month } = req.query;
-
+    backend=process.env.backend_url;
     try {
         const [transactionsResponse, statisticsResponse, barChartResponse, pieChartResponse] = await Promise.all([
-            axios.get(`http://localhost:5000/api/transactions?month=${month}`),
-            axios.get(`http://localhost:5000/api/statistics?month=${month}`),
-            axios.get(`http://localhost:5000/api/barchart?month=${month}`),
-            axios.get(`http://localhost:5000/api/piechart?month=${month}`)
+            axios.get(`${backend}/api/transactions?month=${month}`),
+            axios.get(`${backend}/api/statistics?month=${month}`),
+            axios.get(`${backend}/api/barchart?month=${month}`),
+            axios.get(`${backend}/api/piechart?month=${month}`)
         ]);
 
         const combinedResponse = {
